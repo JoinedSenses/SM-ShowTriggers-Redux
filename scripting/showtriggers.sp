@@ -23,9 +23,9 @@ public Plugin myinfo = {
 
 #define ENABLE_ALL                -2
 #define DISABLE_ALL               -1
-#define FUNC_NOGRENADES            0
-#define FUNC_REGENERATE            1
-#define FUNC_NOBUILD               2
+#define FUNC_NOBUILD               0
+#define FUNC_NOGRENADES            1
+#define FUNC_REGENERATE            2
 #define TRIGGER_APPLY_IMPULSE      3
 #define TRIGGER_CAPTURE_AREA       4
 #define TRIGGER_CATAPULT           5
@@ -39,9 +39,9 @@ public Plugin myinfo = {
 #define MAX_TYPES                  13
 
 static const char g_NAMES[][] = {
+	"func_nobuild",
 	"func_nogrenades",
 	"func_regenerate",
-	"func_nobuild",
 	"trigger_apply_impulse",
 	"trigger_capture_area",
 	"trigger_catapult",
@@ -229,9 +229,9 @@ void CheckBrushes(bool transmit) {
 
 			SDKHookCB f = INVALID_FUNCTION;
 			switch (i) {
+				case FUNC_NOBUILD:              f = hookST_funcNobuild;
 				case FUNC_NOGRENADES:           f = hookST_funcNogrenades;
 				case FUNC_REGENERATE:           f = hookST_funcRegenerate;
-				case FUNC_NOBUILD:              f = hookST_funcNobuild;
 				case TRIGGER_APPLY_IMPULSE:     f = hookST_triggerApplyImpulse;
 				case TRIGGER_CAPTURE_AREA:      f = hookST_triggerCaptureArea;
 				case TRIGGER_CATAPULT:          f = hookST_triggerCatapult;
