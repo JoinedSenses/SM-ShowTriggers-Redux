@@ -86,12 +86,6 @@ public void OnPluginStart() {
 		menu.AddItem(IntToStringEx(i), g_NAMES[i]);
 	}
 	g_Menu = menu;
-
-	for (int i = 1; i <= MaxClients; ++i) {
-		if (IsClientConnected(i)) {
-			OnClientConnected(i);
-		}
-	}
 }
 
 // Display trigger menu
