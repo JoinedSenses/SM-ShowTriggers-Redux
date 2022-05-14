@@ -21,22 +21,24 @@ public Plugin myinfo = {
 	url = PLUGIN_URL
 }
 
-#define ENABLE_ALL                -2
-#define DISABLE_ALL               -1
-#define FUNC_NOBUILD               0
-#define FUNC_NOGRENADES            1
-#define FUNC_REGENERATE            2
-#define TRIGGER_APPLY_IMPULSE      3
-#define TRIGGER_CAPTURE_AREA       4
-#define TRIGGER_CATAPULT           5
-#define TRIGGER_GRAVITY            6
-#define TRIGGER_HURT               7
-#define TRIGGER_IMPACT             8
-#define TRIGGER_MULTIPLE           9
-#define TRIGGER_PUSH               10
-#define TRIGGER_TELEPORT           11
-#define TRIGGER_TELEPORT_RELATIVE  12
-#define MAX_TYPES                  13
+enum {
+	ENABLE_ALL                = -2,
+	DISABLE_ALL               = -1,
+	FUNC_NOBUILD              =  0,
+	FUNC_NOGRENADES               ,
+	FUNC_REGENERATE               ,
+	TRIGGER_APPLY_IMPULSE         ,
+	TRIGGER_CAPTURE_AREA          ,
+	TRIGGER_CATAPULT              ,
+	TRIGGER_GRAVITY               ,
+	TRIGGER_HURT                  ,
+	TRIGGER_IMPACT                ,
+	TRIGGER_MULTIPLE              ,
+	TRIGGER_PUSH                  ,
+	TRIGGER_TELEPORT              ,
+	TRIGGER_TELEPORT_RELATIVE     ,
+	MAX_TYPES
+};
 
 static const char g_NAMES[][] = {
 	"func_nobuild",
@@ -122,7 +124,7 @@ public int menuHandler_Main(Menu menu, MenuAction action, int param1, int param2
 					g_bTypeEnabled[param1][type] = !g_bTypeEnabled[param1][type];
 				}
 			}
-			
+
 			CheckBrushes(ShouldRender());
 
 			menu.DisplayAt(param1, menu.Selection, MENU_TIME_FOREVER);
@@ -192,7 +194,7 @@ public void OnPluginEnd() {
 /**
  * If transmit state has changed, iterates through each brush type
  * to modify entity flags and to (un)hook as needed.
- * 
+ *
  * @param transmit    Should we attempt to transmit these brushes?
  */
 void CheckBrushes(bool transmit) {
@@ -260,7 +262,7 @@ void CheckBrushes(bool transmit) {
 
 /**
  * Function to return the int value as a string directly.
- * 
+ *
  * @param value    The integer value to convert to string
  * @return         String value of passed integer
  */
@@ -273,7 +275,7 @@ char[] IntToStringEx(int value) {
 /**
  * Function to check if we should be attempting to render any of the brush types.
  * Meant to be passed to CheckTriggers() and used for optimizing SetTransmit hooking.
- * 
+ *
  * @return        True if any client has any brush types enabled, else false
  */
 bool ShouldRender() {
