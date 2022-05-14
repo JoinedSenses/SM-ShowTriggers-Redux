@@ -8,7 +8,7 @@
 #define PLUGIN_NAME "Show Triggers (Brushes) Redux"
 #define PLUGIN_AUTHOR "JoinedSenses"
 #define PLUGIN_DESCRIPTION "Toggle brush visibility"
-#define PLUGIN_VERSION "0.2.0"
+#define PLUGIN_VERSION "0.2.1"
 #define PLUGIN_URL "http://github.com/JoinedSenses"
 
 #define EF_NODRAW 32
@@ -21,22 +21,24 @@ public Plugin myinfo = {
 	url = PLUGIN_URL
 }
 
+#define ENABLE_ALL -2
+#define DISABLE_ALL -1
+
 enum {
-	ENABLE_ALL                = -2,
-	DISABLE_ALL               = -1,
-	FUNC_NOBUILD              =  0,
-	FUNC_NOGRENADES               ,
-	FUNC_REGENERATE               ,
-	TRIGGER_APPLY_IMPULSE         ,
-	TRIGGER_CAPTURE_AREA          ,
-	TRIGGER_CATAPULT              ,
-	TRIGGER_GRAVITY               ,
-	TRIGGER_HURT                  ,
-	TRIGGER_IMPACT                ,
-	TRIGGER_MULTIPLE              ,
-	TRIGGER_PUSH                  ,
-	TRIGGER_TELEPORT              ,
-	TRIGGER_TELEPORT_RELATIVE     ,
+	Func_NoBuild,
+	Func_NoGrenades,
+	Func_Regenerate,
+	Trigger_Apply_Impulse,
+	Trigger_Capture_Area,
+	Trigger_Catapult,
+	Trigger_Gravity,
+	Trigger_Hurt,
+	Trigger_Impact,
+	Trigger_Multiple,
+	Trigger_Push,
+	Trigger_Teleport,
+	Trigger_Teleport_Relative,
+
 	MAX_TYPES
 };
 
@@ -225,19 +227,19 @@ void CheckBrushes(bool transmit) {
 
 			SDKHookCB f = INVALID_FUNCTION;
 			switch (i) {
-				case FUNC_NOBUILD:              f = hookST_funcNobuild;
-				case FUNC_NOGRENADES:           f = hookST_funcNogrenades;
-				case FUNC_REGENERATE:           f = hookST_funcRegenerate;
-				case TRIGGER_APPLY_IMPULSE:     f = hookST_triggerApplyImpulse;
-				case TRIGGER_CAPTURE_AREA:      f = hookST_triggerCaptureArea;
-				case TRIGGER_CATAPULT:          f = hookST_triggerCatapult;
-				case TRIGGER_GRAVITY:           f = hookST_triggerGravity;
-				case TRIGGER_HURT:              f = hookST_triggerHurt;
-				case TRIGGER_IMPACT:            f = hookST_triggerImpact;
-				case TRIGGER_MULTIPLE:          f = hookST_triggerMultiple;
-				case TRIGGER_PUSH:              f = hookST_triggerPush;
-				case TRIGGER_TELEPORT:          f = hookST_triggerTeleport;
-				case TRIGGER_TELEPORT_RELATIVE: f = hookST_triggerTeleportRelative;
+				case Func_NoBuild:              f = hookST_funcNobuild;
+				case Func_NoGrenades:           f = hookST_funcNogrenades;
+				case Func_Regenerate:           f = hookST_funcRegenerate;
+				case Trigger_Apply_Impulse:     f = hookST_triggerApplyImpulse;
+				case Trigger_Capture_Area:      f = hookST_triggerCaptureArea;
+				case Trigger_Catapult:          f = hookST_triggerCatapult;
+				case Trigger_Gravity:           f = hookST_triggerGravity;
+				case Trigger_Hurt:              f = hookST_triggerHurt;
+				case Trigger_Impact:            f = hookST_triggerImpact;
+				case Trigger_Multiple:          f = hookST_triggerMultiple;
+				case Trigger_Push:              f = hookST_triggerPush;
+				case Trigger_Teleport:          f = hookST_triggerTeleport;
+				case Trigger_Teleport_Relative: f = hookST_triggerTeleportRelative;
 				// somehow got an invalid index. this shouldnt happen unless someone modifies this plugin and fucks up.
 				default: break;
 			}
@@ -296,91 +298,91 @@ bool ShouldRender() {
 
 
 public Action hookST_funcNogrenades(int entity, int client) {
-	if (g_bTypeEnabled[client][FUNC_NOGRENADES]) {
+	if (g_bTypeEnabled[client][Func_NoGrenades]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_funcRegenerate(int entity, int client) {
-	if (g_bTypeEnabled[client][FUNC_REGENERATE]) {
+	if (g_bTypeEnabled[client][Func_Regenerate]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_funcNobuild(int entity, int client) {
-	if (g_bTypeEnabled[client][FUNC_NOBUILD]) {
+	if (g_bTypeEnabled[client][Func_NoBuild]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerApplyImpulse(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_APPLY_IMPULSE]) {
+	if (g_bTypeEnabled[client][Trigger_Apply_Impulse]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerCaptureArea(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_CAPTURE_AREA]) {
+	if (g_bTypeEnabled[client][Trigger_Capture_Area]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerCatapult(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_CATAPULT]) {
+	if (g_bTypeEnabled[client][Trigger_Catapult]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerGravity(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_GRAVITY]) {
+	if (g_bTypeEnabled[client][Trigger_Gravity]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerHurt(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_HURT]) {
+	if (g_bTypeEnabled[client][Trigger_Hurt]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerImpact(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_IMPACT]) {
+	if (g_bTypeEnabled[client][Trigger_Impact]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerMultiple(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_MULTIPLE]) {
+	if (g_bTypeEnabled[client][Trigger_Multiple]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerPush(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_PUSH]) {
+	if (g_bTypeEnabled[client][Trigger_Push]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerTeleport(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_TELEPORT]) {
+	if (g_bTypeEnabled[client][Trigger_Teleport]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
 }
 
 public Action hookST_triggerTeleportRelative(int entity, int client) {
-	if (g_bTypeEnabled[client][TRIGGER_TELEPORT_RELATIVE]) {
+	if (g_bTypeEnabled[client][Trigger_Teleport_Relative]) {
 		return Plugin_Continue;
 	}
 	return Plugin_Handled;
